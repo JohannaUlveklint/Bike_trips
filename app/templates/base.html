@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Webpage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}"/>
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero is-primary has-background-yellow"></section>
+        <div class="hero-head">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="container">
+
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                      <span aria-hidden="true"></span>
+                      <span aria-hidden="true"></span>
+                      <span aria-hidden="true"></span>
+                    </a>
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('bp_open.index') }}" class="navbar-item">Home</a>
+                            <a href="{{ url_for('bp_open.about') }}" class="navbar-item">About</a>
+                            <a href="{{ url_for('bp_open.cyclists') }}" class="navbar-item">Cyclists</a>
+                            <a href="{{ url_for('bp_open.trips') }}" class="navbar-item">Trips</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+        <img src="{{ url_for('static', filename='img/countryside_cyclist.jpg')}}"/>
+        <hr />
+        {% block footer %}
+        {% endblock %}
+    <script src="{{ url_for('static', filename='js/rotate.js') }}"></script>
+</body>
+</html>

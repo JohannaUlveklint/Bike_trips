@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Trips</h1>
+    <p>List of all trips:</p>
+    <table class="table is-striped">
+        <thead>
+            <tr><th>From</th><th>To</th><th>Distance (km)</th><th>Duration</th></tr>
+        </thead>
+        {% for trip in trips %}
+            <tr><td>{{ trip.from }}</td><td>{{ trip.to }}</td><td>{{ trip.distance/1000 }}</td><td>{{ trip.time }}</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

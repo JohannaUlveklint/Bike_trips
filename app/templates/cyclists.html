@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Cyclists</h1>
+
+    <table class="table is-striped">
+        <thead>
+            <tr><th>Last Name</th><th>First Name</th><th>Bike Brand</th><th>Bike Model</th></tr>
+        </thead>
+        {% for user in users %}
+            <tr><td>{{ user.last_name }}</td><td>{{ user.first_name }}</td><td>{{ user.bike_brand }}</td><td>{{ user.bike_model }}</td></tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block footer %}
+    <p>Testing footer</p>
+{% endblock %}
+
+
