@@ -5,3 +5,7 @@ __pycache__/
 .env
 db_config.py
 docker-compose.yml
+generate_secret.py
+query_mdb.txt
+generator/
+TODO.txt

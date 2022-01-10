@@ -1,4 +1,3 @@
-import datetime
 
 from app.persistance.models import Trip
 

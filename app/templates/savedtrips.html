@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Saved trips by {{ current_user.first_name }}{% endblock %}
+
+{% block navbar %}
+              <div id="navbarBasicExample" class="navbar-menu">
+                  <div class="navbar-start">
+                      <a class="navbar-item" href="https://monark.se">
+                          Log trip
+                      </a>
+
+                      <a class="navbar-item" href="/savedtrips">
+                          Saved trips
+                      </a>
+
+                      <a class="navbar-item" href="https://monark.se">
+                          Statistics
+                      </a>
+                  </div>
+              </div>
+{% endblock %}
+
+{% block content %}
+        {% if not current_user.trips %}
+            <p>You have no saved trips</p>
+
+        {% else %}
+            <h1>Saved trips</h1>
+
+            <table class="table is-striped">
+                <thead>
+                    <tr><th>Date</th><th>From</th><th>To</th><th>Distance</th><th>Duration</th></tr>
+                </thead>
+            {% for trip in current_user.trips %}
+                <tr><td>{{ trip['date'] }}</td><td>{{ trip['from'] }}</td><td>{{ trip['to'] }}</td><td>{{ trip['distance']/1000 }}</td><td>{{ hhmmss(trip['duration']) }}</td></tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+{% endblock %}
+

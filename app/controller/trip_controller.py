@@ -16,11 +16,10 @@ def get_all_trips():
 
 
 def main():
-    trips = get_all_trips()
-    print()
+    pass
+    # trips = get_all_trips()
+    # print()
 
 
 if __name__ == '__main__':
     main()
-
-

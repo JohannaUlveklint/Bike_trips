@@ -1,48 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Webpage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}"/>
-    <style>
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %} {% endblock %}</title>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v.5.0.7/js/all.js"></script>
+{#        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">#}
+        <style>
+.hero {
+    background: {{ url_for('static', filename='img/countryside_cyclist.jpg') }} center / cover;
+}
+
+@media (max-width: 1024px) { .hero {background: black {{ url_for('static', filename='img/countryside_cyclist.jpg') }} center / cover; }}
+@media (max-width: 768px) { .hero {background: black {{ url_for('static', filename='img/countryside_cyclist.jpg') }} center / cover; }}
+
+        </style>
+        {% block head %} {% endblock %}
 </head>
 <body>
-    <section class="hero is-primary has-background-yellow"></section>
-        <div class="hero-head">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="container">
+    <section class="hero is-fullheight">
 
-                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                      <span aria-hidden="true"></span>
-                      <span aria-hidden="true"></span>
-                      <span aria-hidden="true"></span>
-                    </a>
+        <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+          <div class="container">
+              <div class="navbar-brand">
+                  <a class="navbar-item" href="/">
+                    <img src= {{ url_for('static', filename='img/bike_logo.svg') }} width="120%" height="120%" alt="stylized bike">
+                  </a>
 
-                    <div id="navbarMenuHeroA" class="navbar-menu">
-                        <div class="navbar-end">
-                            <a href="{{ url_for('bp_open.index') }}" class="navbar-item">Home</a>
-                            <a href="{{ url_for('bp_open.about') }}" class="navbar-item">About</a>
-                            <a href="{{ url_for('bp_open.cyclists') }}" class="navbar-item">Cyclists</a>
-                            <a href="{{ url_for('bp_open.trips') }}" class="navbar-item">Trips</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+                  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
+              </div>
+
+              <div id="navbarBasicExample" class="navbar-menu">
+                  <div class="navbar-start">
+{#                      <a href="/" class="navbar-item">#}
+{#                          Home#}
+{#                      </a>#}
+
+                      <a class="navbar-item" href="https://monark.se">
+                          Search route
+                      </a>
+
+                      {% block navbar %} {% endblock %}
+
+                      <div class="navbar-item has-dropdown is-hoverable">
+                          <a class="navbar-link"> <!-- Needs to be moved a little bit to the right somehow -->
+                              More
+                          </a>
+
+                          <div class="navbar-dropdown">
+                              <a class="navbar-item">
+                                  About
+                              </a>
+                              <a class="navbar-item">
+                                  Jobs
+                              </a>
+                              <a class="navbar-item">
+                                  Contact
+                              </a>
+                              <hr class="navbar-divider">
+                              <a class="navbar-item">
+                                  Report an issue
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="navbar-end">
+                      <a class="navbar-item">
+                          {% if current_user.is_authenticated %}
+                              <a href="/user" class="navbar-item">
+                                  Profile
+                              </a>
+                              <a href="/signout" class="navbar-item">
+                                  Sign Out
+                              </a>
+                          {% else %}
+                              <a href="/signup" class="navbar-item">
+                                  Sign Up
+                              </a>
+                              <a href="/signin" class="navbar-item">
+                                  Sign In
+                              </a>
+                          {% endif %}
+
+                          {% if current_user.admin %}
+                              <a href="/admin" class="navbar-item">
+                                  Admin
+                              </a>
+                          {% endif %}
+                      </a>
+                  </div>
+              </div>
+          </div>
+
+        </nav>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
-
-        {% block content %}
-        {% endblock %}
-        <img src="{{ url_for('static', filename='img/countryside_cyclist.jpg')}}"/>
+{#        <header class="hero-body">#}
+{#            <div class="is-overlay has-text-centered single-spaced" style="top: 82px">#}
+{#                <h1 class="subtitle is-4 has-text-weight-light has-text-black">It's time</h1>#}
+{#                <h2 class="title is-1 has-text-black">To get on your bike</h2>#}
+{#            </div>#}
+{##}
+{#        </header>#}
+            <!-- Put below inside hero-body? -->
         <hr />
         {% block footer %}
         {% endblock %}
-    <script src="{{ url_for('static', filename='js/rotate.js') }}"></script>
+    </section>
 </body>
 </html>
