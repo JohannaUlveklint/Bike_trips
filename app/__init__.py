@@ -38,6 +38,23 @@ def create_app():
             return time
 
         return dict(hhmmss=hhmmss)
+
+    @_app.context_processor
+    def utility_processor():
+        def date_without_ms(date):
+            without = date.strftime("%Y-%m-%d %H:%M:%S")
+            return without
+
+        return dict(date_time=date_without_ms)
+
+    @_app.context_processor
+    def utility_processor():
+        def distance_rounded(distance):
+            rounded = round((distance / 1000), 3)
+            return rounded
+
+        return dict(rounded_distance=distance_rounded)
+
     return _app
 
 
