@@ -75,4 +75,4 @@ def signout():
 
 @bp_open.get('/searchroute')
 def search_route():
-    return redirect(url_for('bp_open.search_route'))
+    return render_template('searchroute.html')

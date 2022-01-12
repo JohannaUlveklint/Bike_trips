@@ -9,9 +9,7 @@
         <script defer src="https://use.fontawesome.com/releases/v.5.0.7/js/all.js"></script>
 {#        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">#}
         <style>
-.hero {
-    background: {{ url_for('static', filename='img/countryside_cyclist.jpg') }} center / cover;
-}
+
 
 @media (max-width: 1024px) { .hero {background: black {{ url_for('static', filename='img/countryside_cyclist.jpg') }} center / cover; }}
 @media (max-width: 768px) { .hero {background: black {{ url_for('static', filename='img/countryside_cyclist.jpg') }} center / cover; }}
@@ -42,7 +40,7 @@
 {#                          Home#}
 {#                      </a>#}
 
-                      <a class="navbar-item" href="https://monark.se">
+                      <a class="navbar-item" href="/searchroute">
                           Search route
                       </a>
 
