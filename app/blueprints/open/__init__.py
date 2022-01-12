@@ -71,3 +71,8 @@ def signout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('bp_open.index'))
+
+
+@bp_open.get('/searchroute')
+def search_route():
+    return redirect(url_for('bp_open.search_route'))

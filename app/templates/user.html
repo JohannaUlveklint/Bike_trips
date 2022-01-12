@@ -1,28 +1,8 @@
-{% extends "base.html" %}
+{% extends "user_base.html" %}
 
 {% block title %}Profile for {{ current_user.first_name }}{% endblock %}
-
-{% block navbar %}
-              <div id="navbarBasicExample" class="navbar-menu">
-                  <div class="navbar-start">
-                      <a class="navbar-item" href="https://monark.se">
-                          Log trip
-                      </a>
-
-                      <a class="navbar-item" href="/user/savedtrips">
-                          Saved trips
-                      </a>
-
-                      <a class="navbar-item" href="https://monark.se">
-                          Statistics
-                      </a>
-                  </div>
-              </div>
-{% endblock %}
 
 {% block content %}
     <h1 class="title">Welcome {{ current_user.first_name }}</h1> <!-- Can I easily exclude this content so that savedtrips.html can inherit from user.html? -->
     <h2 class="subtitle">This is your page</h2>
-
-
 {% endblock %}
