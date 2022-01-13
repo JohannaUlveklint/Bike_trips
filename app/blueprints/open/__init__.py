@@ -59,7 +59,7 @@ def signup_post():
         flash('Email address already exists!')
         return redirect(url_for('bp_open.signup_get'))
 
-    # If not, create a suer with the password hashed, and save it to the db
+    # If not, create a user with the password hashed, and save it to the db
     # Redirect to the sign in page
     create_user(first_name, last_name, email, password)
     return redirect(url_for('bp_open.signin_get'))
@@ -76,3 +76,9 @@ def signout():
 @bp_open.get('/searchroute')
 def search_route():
     return render_template('searchroute.html')
+
+
+@bp_open.post('/searchroute')
+def search_route_post():
+    start = request.form.get('start')
+    end = request.form.get('end')
