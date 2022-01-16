@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+{#    Make them all style="text-align: left" on a fancier way?#}
+{#    Tab the result#}
+{#    Should I do this in def show_route()?#}
+    <p style="text-align: left">Start: {{ start }}</p>
+    <p style="text-align: left">End: {{ end }}</p>
+    <p style="text-align: left">Distance: {{ rounded_distance(route['routes'][0]['summary']['distance']) }} km</p>
+    <p style="text-align: left">Duration (regular cyclist): {{ hhmmss(route['routes'][0]['summary']['duration']) }}</p>
+    <p style="text-align: left">Elevation increase: {{ route['routes'][0]['summary']['ascent'] }} m </p>
+    <p style="text-align: left">Elevation decrease: {{ route['routes'][0]['summary']['descent'] }} m</p>
+    <p style="text-align: left">Elevation gain: {{ route['routes'][0]['summary']['ascent'] - route['routes'][0]['summary']['descent'] }} m</p>
+    <p style="text-align: left">Route: {{ route }}</p>
+{% endblock %}

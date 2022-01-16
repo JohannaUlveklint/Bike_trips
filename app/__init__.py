@@ -10,7 +10,8 @@ from app.persistance.db import init_db
 
 def create_app():
     _app = Flask(__name__)
-    _app.config['SECRET_KEY'] = 'ed7d2a5786f44a7e646ce1d538647a4339e9be587384632eafad8b763661ec7f'
+    _app.config['SECRET_KEY'] = 'ed7d2a5786f44a7e646ce1d538647a4339e9be587384632eafad8b763661ec7f'  # Change and put
+    # in .env?
 
     login_manager = LoginManager()
     login_manager.init_app(_app)

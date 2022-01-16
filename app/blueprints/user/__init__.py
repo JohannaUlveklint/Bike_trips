@@ -37,3 +37,7 @@ def saved_trips():
     #     flash('Error signing in. Check your email and password!')
     #     return redirect(url_for('bp_open.signin_get'))
 
+
+@bp_user.get('/profile')
+def profile():
+    return render_template('profile.html')

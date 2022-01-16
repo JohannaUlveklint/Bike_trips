@@ -33,11 +33,32 @@
                 </div>
                 <div class="field">
                     <div class="control">
-                        <input class="input is-large" type="password" name="password" placeholder="Your Password" required>
+                        <input class="input is-large" type="password" id="pwd1" name="password" placeholder="Your Password" required>
                     </div>
                 </div>
-                <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-large" type="password" id="pwd2" oninput="checkPassword()" placeholder="Repeat Password" required>
+                    </div>
+                </div>
+                <button class="button is-block is-info is-large is-fullwidth" id="submit" type="submit" disabled>Sign Up</button>
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function checkPassword() {
+            let pwd1 = document.getElementById("pwd1");
+            let pwd2 = document.getElementById("pwd2");
+            if(pwd1.value === pwd2.value) {
+                document.getElementById("submit").disabled = false;
+            }
+            else {
+                document.getElementById("submit").disabled= true;
+            }
+        }
+
+    </script>
 {% endblock %}
