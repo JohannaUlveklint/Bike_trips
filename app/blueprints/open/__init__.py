@@ -84,23 +84,33 @@ def search_route():
 
 @bp_open.post('/searchroute')
 def search_route_post():
-    # start = request.form.get('start')
-    # end = request.form.get('end')
-    start = 'Runstensgatan 1 Göteborg'
-    end = 'Sommarvädersgatan 1 Göteborg'
+    start = request.form.get('start')
+    end = request.form.get('end')
+    # start = 'Hästhovsgatan 8 Göteborg'
+    # end = 'Sommarvädersgatan 1 Göteborg'
     s_lat, s_long, e_lat, e_long = lat_long(start, end)
     route = get_route(s_lat, s_long, e_lat, e_long)
     return route
 
 
 def get_route(s_lat, s_long, e_lat, e_long):
-    api_key = "5b3ce3597851110001cf6248d62eca3e4d314dba96c2e5596a0f8074"
-    if not all([s_long, s_lat, e_long, e_lat]):
+    # api_key = "5b3ce3597851110001cf6248680f561c9c8640959dd1ecf9bf79f809"
+    if not all([s_long, s_lat, e_long, e_lat]):  # Make an exception on this?
         print("Missing geo-coordinates")
         return None
 
-    search = f'api_key={api_key}&start={s_long},{s_lat}&end={e_long},{e_lat}'
-    response = requests.get('https://api.openrouteservice.org/v2/directions/cycling-regular?' + search)
+    # search = f'api_key={api_key}&start={s_long},{s_lat}&end={e_long},{e_lat}'
+    # response = requests.get('https://api.openrouteservice.org/v2/directions/cycling-regular?' + search)
+    body = {"coordinates": [[s_long, s_lat], [e_long, e_lat]], "elevation": "true",
+            "geometry": "true"}
+
+    headers = {
+        'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
+        'Authorization': '5b3ce3597851110001cf6248680f561c9c8640959dd1ecf9bf79f809',
+        'Content-Type': 'application/json; charset=utf-8'
+    }
+    response = requests.post('https://api.openrouteservice.org/v2/directions/cycling-regular', json=body,
+                             headers=headers)
     if not response.ok:
         return 'Bad Request!'
     response = response.json()
@@ -130,7 +140,7 @@ def remove_non_ascii(text):
 
 
 def main():
-    route = search_route_post
+    route = search_route_post()
     print(route)
 
 
