@@ -68,6 +68,10 @@ def signup_post():
     create_user(first_name, last_name, email, password)
     return redirect(url_for('bp_open.signin_get'))
 
+#
+# def remove_non_ascii(text):
+#     return unidecode(text)
+
 
 @bp_open.get('/signout')  # Should this be in user?
 @login_required
@@ -86,11 +90,17 @@ def search_route():
 def search_route_post():
     start = request.form.get('start')
     end = request.form.get('end')
-    # start = 'Hästhovsgatan 8 Göteborg'
-    # end = 'Sommarvädersgatan 1 Göteborg'
     s_lat, s_long, e_lat, e_long = lat_long(start, end)
     route = get_route(s_lat, s_long, e_lat, e_long)
-    return route
+    return render_template('showroute.html', start=start, end=end, route=route)
+
+
+# Am I thinking wrong here?
+@bp_open.get('/showroute')
+def show_route(start, end, route):
+    start = start
+    end = end
+    route = route
 
 
 def get_route(s_lat, s_long, e_lat, e_long):
@@ -135,8 +145,6 @@ def lat_long(start, end):
     return s_lat, s_long, e_lat, e_long
 
 
-def remove_non_ascii(text):
-    return unidecode(text)
 
 
 def main():
